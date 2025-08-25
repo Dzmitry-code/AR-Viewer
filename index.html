@@ -23,6 +23,40 @@
     canvas { display: block; width: 100%; height: 100%; }
     a { color: #9bd2ff; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    /* Floating AR button */
+.ar-fab{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999; /* above overlay */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  color: #e6edf3;
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.ar-fab:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.18); }
+.ar-fab:active{ transform: translateY(0); }
+@media (max-width: 640px){
+  .ar-fab{ right: 12px; bottom: 12px; gap: 8px; padding: 11px 12px; font-size: 13px; }
+  .ar-fab svg{ width: 18px; height: 18px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .ar-fab{ transition: none; }
+}
+@media (max-height: 560px){
+  .ar-fab{ bottom: 64px; }
+}
+
   </style>
   <script type="importmap">
   {
@@ -63,6 +97,20 @@
   <div id="drop">Drop your .glb / .gltf</div>
   <canvas id="c"></canvas>
   <script type="module" src="js/main.js"></script>
+  <!-- Floating AR button -->
+<a id="openAR"
+   class="ar-fab"
+   href="#"
+   aria-label="Open in AR"
+   title="Open in AR">
+  <!-- simple phone/cube icon -->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M12 8l4 2.3v3.4L12 16l-4-2.3V10.3L12 8z" stroke="currentColor" stroke-width="1.5"/>
+  </svg>
+  <span>Open in AR</span>
+</a>
+
   <script>
 (function () {
   const params = new URLSearchParams(location.search);
